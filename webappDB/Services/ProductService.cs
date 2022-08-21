@@ -5,21 +5,28 @@ using webappDB.Models;
 
 namespace webappDB.Services
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
-        private static string db_source = "appservermus.database.windows.net";
-        private static string db_user = "musdb";
-        private static string db_passwrod = "Mhbnr@2751";
-        private static string db_database = "appdb";
+        //private static string db_source = "appservermus.database.windows.net";
+        //private static string db_user = "musdb";
+        //private static string db_passwrod = "Mhbnr@2751";
+        //private static string db_database = "appdb";
 
-       private  SqlConnection GetConnection()
+        private readonly IConfiguration _configuration;
+        public ProductService(IConfiguration configuration)
         {
-            var _builder = new SqlConnectionStringBuilder();
-            _builder.DataSource = db_source;
-            _builder.UserID = db_user;
-            _builder.Password = db_passwrod;
-            _builder.InitialCatalog = db_database;
-            return new SqlConnection(_builder.ConnectionString);
+            _configuration = configuration;
+        }
+
+        private SqlConnection GetConnection()
+        {
+            //var _builder = new SqlConnectionStringBuilder();
+            //_builder.DataSource = db_source;
+            //_builder.UserID = db_user;
+            //_builder.Password = db_passwrod;
+            //_builder.InitialCatalog = db_database;
+
+            return new SqlConnection(_configuration.GetConnectionString("SQLConnection"));
         }
 
         public List<Product> GetProducts()
