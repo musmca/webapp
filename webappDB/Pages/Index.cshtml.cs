@@ -18,7 +18,7 @@ namespace webappDB.Pages
         public void OnGet()
         {
             //ProductService productService = new ProductService();
-            Products = _productService.GetProducts();
+            //Products = _productService.GetProducts();
         }
     }
 }
